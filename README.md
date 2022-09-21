@@ -1,2 +1,4 @@
 # variationalform.github.io
-Git Pages - variational form Web Site
+Git Pages - web site for <http://variationalform.github.io>
+
+
