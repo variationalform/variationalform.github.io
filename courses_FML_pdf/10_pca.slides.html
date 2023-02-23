@@ -14455,8 +14455,7 @@ Niklas Wahlström, Fredrik Lindsten, Thomas B. Schön. Cambridge University Pres
 <li>IPDS: Introduction to Probability for Data Science, by Stanley H. Chan,
 <a href="https://probability4datascience.com">https://probability4datascience.com</a></li>
 </ul>
-<p>These can be accessed legally and without cost. <strong>NOTE:</strong> we haven't referred to
-the second of these before.</p>
+<p>These can be accessed legally and without cost.</p>
 <p>There are also these useful references for coding:</p>
 <ul>
 <li>PT: <code>python</code>: <a href="https://docs.python.org/3/tutorial">https://docs.python.org/3/tutorial</a></li>
@@ -14482,9 +14481,9 @@ the second of these before.</p>
 <h2 id="Eigen-systems-of-Symmetric-Matrices">Eigen-systems of Symmetric Matrices<a class="anchor-link" href="#Eigen-systems-of-Symmetric-Matrices">&#182;</a></h2><p>Given a real square $n$-row by $n$-column matrix,
 $\boldsymbol{A}\in\mathbb{R}^{n\times n}$ the eigenvalue problem
 is that of finding scalar eigenvalues $\lambda$
-and eigenvectors $\boldsymbol{v}$ such that</p>
+and $n$-dimensional eigenvectors $\boldsymbol{v}$ such that</p>
 $$
-\boldsymbol{A}\boldsymbol{v}=\lambda\boldsymbol{A}    
+\boldsymbol{A}\boldsymbol{v}=\lambda\boldsymbol{v}    
 \quad\Longrightarrow\quad
 \boldsymbol{A}\boldsymbol{V}=\boldsymbol{V}\boldsymbol{D}  
 \quad\Longrightarrow\quad
@@ -14511,10 +14510,11 @@ $\boldsymbol{B}\in\mathbb{R}^{m\times n}$</p>
 $$
 \boldsymbol{B} = \boldsymbol{U}\boldsymbol{\Sigma}\boldsymbol{V}^T
 =\sum_{j=1}^{p} \sigma_j \boldsymbol{u}_j\boldsymbol{v}_j^T
-$$<p>where: $\boldsymbol{U}\in\mathbb{R}^{m\times m}$,
-$\boldsymbol{\Sigma}\in\mathbb{R}^{m\times n}$, $\boldsymbol{V}\in\mathbb{R}^{n\times n}$
-and $p=\min\{m,n\}$.</p>
-<p>Note that $\boldsymbol{\Sigma}=\text{diag}(\sigma_1,\ldots,\sigma_p) + \text{'zeros'}$,
+$$<p>where: for the left singular vectors: $\boldsymbol{U}\in\mathbb{R}^{m\times m}$;
+for the singular values: $\boldsymbol{\Sigma}\in\mathbb{R}^{m\times n}$;
+and, for the right singular vectors, $\boldsymbol{V}\in\mathbb{R}^{n\times n}$.
+Here $p=\min\{m,n\}$.</p>
+<p>Note that $\boldsymbol{\Sigma}=\text{diag}(\sigma_1,\ldots,\sigma_p) + \mathit{zeros}$,
 and we can always arrange that $0 \le \sigma_1\le\cdots\le\sigma_p$.</p>
 <p>As $\boldsymbol{B}$ is real,
 $\boldsymbol{U}$ and $\boldsymbol{V}$ are real and <em>orthogonal</em>.</p>
@@ -14526,7 +14526,7 @@ $r$ is the rank of $\boldsymbol{B}$.</p>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="How-are-these-factorizations-connected?">How are these factorizations connected?<a class="anchor-link" href="#How-are-these-factorizations-connected?">&#182;</a></h2><p>On the face of it they are very different. the first applies only to 
-square symmetric materices, while the second applies also to
+square symmetric matrices, while the second applies also to
 rectangular, and hence (why?) non-symmetric matrices.</p>
 <p>But... Look at this... Given the SVD 
 $\boldsymbol{B} = \boldsymbol{U}\boldsymbol{\Sigma}\boldsymbol{V}^T$
@@ -14584,7 +14584,7 @@ $$
 \boldsymbol{A}=\boldsymbol{V}\boldsymbol{D}\boldsymbol{V}^T.
 $$<ul>
 <li>Put $\boldsymbol{A} = \boldsymbol{B}\boldsymbol{B}^T$ (symmetric) and 
-$\boldsymbol{D} = \boldsymbol{\Sigma}^T\boldsymbol{\Sigma}$. Then,</li>
+$\boldsymbol{D} = \boldsymbol{\Sigma}\boldsymbol{\Sigma}^T$. Then,</li>
 </ul>
 $$
 \boldsymbol{B}\boldsymbol{B}^T
@@ -14605,7 +14605,7 @@ roots of the eigenvalues of $\boldsymbol{B}^T\boldsymbol{B}$
 and $\boldsymbol{B}\boldsymbol{B}^T$.</p>
 </li>
 <li><p><strong>NOTE:</strong> $\boldsymbol{B}^T\boldsymbol{B}$ and $\boldsymbol{B}\boldsymbol{B}^T$
-have the same non-zero eigenvalues.</p>
+have the same non-zero eigenvalues (same rank).</p>
 </li>
 </ul>
 
@@ -14613,12 +14613,19 @@ have the same non-zero eigenvalues.</p>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Why-does-this-matter?">Why does this matter?<a class="anchor-link" href="#Why-does-this-matter?">&#182;</a></h2>
+<h2 id="Why-does-this-matter?">Why does this matter?<a class="anchor-link" href="#Why-does-this-matter?">&#182;</a></h2><p>Our data, $\boldsymbol{X}$, is organized into rows of feature values with one observation per row 
+and one feature per column. We write this as</p>
+$$
+\boldsymbol{X} = \Big(
+\boldsymbol{X}_0, \boldsymbol{X}_1, \cdots, \boldsymbol{X}_N
+\Big)
+$$<p>If $N=3$ (four features)...</p>
+
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Well, recall the <strong>covariance matrix</strong>, it takes this form:</p>
+<p>... we recall that the <strong>covariance matrix</strong> takes this form:</p>
 $$
 \boldsymbol{M} = 
 \left(\begin{array}{llll}
@@ -14627,16 +14634,14 @@ $$
 \mathrm{Cov}(X_2,X_0)  &amp;  \mathrm{Cov}(X_2,X_1)  &amp;  \mathrm{Var}(X_2)  &amp;  \mathrm{Cov}(X_2,X_3) \\
 \mathrm{Cov}(X_3,X_0)  &amp;  \mathrm{Cov}(X_3,X_1)  &amp;  \mathrm{Cov}(X_3,X_2)  &amp;  \mathrm{Var}(X_3) \\
 \end{array}\right)
-$$<p>Recall that $\mathrm{Cov}(X,X)=\mathrm{Var}(X)$ and note that 
-$\mathrm{Cov}(X,Y)=\mathrm{Cov}(Y,X)$. This matrix is therefore <strong>symmetric</strong>
+$$<p>because $\mathrm{Cov}(X,X)=\mathrm{Var}(X)$. Since $\mathrm{Cov}(X,Y)=\mathrm{Cov}(Y,X)$, this matrix is <strong>symmetric</strong>
 and so has real eigenvalues.</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We have seen that if the data in the $X_i$'s are already centered and 
-collected into the column vectors $\boldsymbol{X}_i$. Then,</p>
+<p>We have seen that if the data are already centred then,</p>
 $$
 (N-1)\boldsymbol{M} = 
 \left(\begin{array}{llll}
@@ -14674,6 +14679,10 @@ $$
 \boldsymbol{X}_3
 \\
 \end{array}\right)
+$$<p>and, hence (in general), the (sample) covariance matrix is</p>
+$$
+\boldsymbol{M} = 
+\frac{1}{(N-1)}\boldsymbol{X}^T\boldsymbol{X}.
 $$
 </div>
 </div><div class="fragment">
