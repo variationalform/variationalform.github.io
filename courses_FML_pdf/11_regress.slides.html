@@ -14438,6 +14438,7 @@ Visit <a href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativeco
 <h2 id="What-this-is-about:">What this is about:<a class="anchor-link" href="#What-this-is-about:">&#182;</a></h2><ul>
 <li>Polynomial regression.</li>
 <li>The best straight line (or polynomial) through data.</li>
+<li>Cost and Loss: MSE and TSE (Mean/Total Squared Error)</li>
 <li>The standard approach, and also ridge and LASSO regularization.</li>
 <li>$p &gt; n$</li>
 <li>Logistic regression for classification.</li>
@@ -15259,7 +15260,7 @@ and the quintic one in blue. The original training data is red.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7f7fd0545cf8&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7ffbd28ad0b8&gt;]</pre>
 </div>
 
 </div>
@@ -15388,7 +15389,7 @@ Our earlier values were: c = [1.01694915] and m = [0.69491525]
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7f7fb0747438&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7ffb80a17748&gt;]</pre>
 </div>
 
 </div>
@@ -15671,7 +15672,7 @@ predictor in green.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7f7fc10ca0f0&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7ffbc02ff438&gt;]</pre>
 </div>
 
 </div>
@@ -15783,7 +15784,7 @@ ridge reg_intercept_ =  [1.0460251]
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7f8000f034a8&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7ffba0cf8860&gt;]</pre>
 </div>
 
 </div>
@@ -15913,7 +15914,7 @@ predictor in green, and the LASSO predictor in cyan.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7f7f88041dd8&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7ffb80b29278&gt;]</pre>
 </div>
 
 </div>
@@ -16096,7 +16097,8 @@ switch from <strong>off</strong> to <strong>on</strong> as we cross the decision
 <p>Here, for $a\in\mathbb{R}$, is the logistic function, often called the <strong>sigmoid</strong>:</p>
 $$
 \sigma(x\mid a) = \frac{1}{1+\exp(-ax)}
-$$
+$$<p><strong>In Particular:</strong> the sigmoid function can model a <strong>probability</strong>.</p>
+
 </div>
 </div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -16433,7 +16435,7 @@ the penguins data we have been using.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;seaborn.axisgrid.PairGrid at 0x7f7fd061ee10&gt;</pre>
+<pre>&lt;seaborn.axisgrid.PairGrid at 0x7ffba0d14ba8&gt;</pre>
 </div>
 
 </div>
@@ -16488,7 +16490,7 @@ the penguins data we have been using.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;seaborn.axisgrid.PairGrid at 0x7f7fd0670fd0&gt;</pre>
+<pre>&lt;seaborn.axisgrid.PairGrid at 0x7ffbc032e710&gt;</pre>
 </div>
 
 </div>
@@ -16782,9 +16784,27 @@ $$<p>Therefore, simplifying,</p>
 $$
 \ln\left(\frac{p}{1-p}\right)
 =\boldsymbol{\theta}^T\boldsymbol{x}
-$$<p>and there is the connection to linear regression. We fit the straight line
-to the log-odds which, in turn, are estimated from the training data.</p>
-<p>This can be done in <code>sklearn</code>. The details are here:</p>
+$$<p>and there is the connection to linear regression. The decision boundary
+models the log-odds.</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="How-Do-We-Do-Logistic-Regression?">How Do We Do Logistic Regression?<a class="anchor-link" href="#How-Do-We-Do-Logistic-Regression?">&#182;</a></h3><p>Suppose we have a training set of features $\boldsymbol{x}_1$,
+$\boldsymbol{x}_2$, $\boldsymbol{x}_3$, $\ldots$, with corresponding
+labels $y_1$, $y_2$, $y_3$, $\ldots$. We suppose that the labels are
+either $y=0$ or $y=1$ to represent the <strong>binary classification</strong>.</p>
+<p>Then, for a given pair $(\boldsymbol{x}_k, y_k)$ with 
+$\boldsymbol{x}_k = (x_{1,k}, x_{2,k})^T$, we can set up
+the <strong>squared loss</strong>,</p>
+$$
+\big\vert y_k - \sigma(x_{1,k}, x_{2,k} \mid a, b, c)\big\vert^2
+$$<p>and use it to form a TSE or MSE cost over the training set. We
+then choose $a$, $b$ and $c$ to minimise this cost.</p>
+<p>There is no closed-form solution to this (no equivalent of
+the Normal Equations), but we can use numerical techniques.</p>
+<p>It can (of course) be done in <code>sklearn</code>. The details are here:</p>
 <p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html</a></p>
 <p>along with an actual example on the Iris data set.</p>
 
