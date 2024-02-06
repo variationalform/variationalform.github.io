@@ -14593,6 +14593,7 @@ longer.</p>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Here it is again,</p>
 $$
 \boldsymbol{B}\boldsymbol{w}
 = \left(\begin{array}{rrr}
@@ -14978,8 +14979,8 @@ $\boldsymbol{V}^{-1}=\boldsymbol{V}^T$ - which is very easy to
 calculate once $\boldsymbol{V}$ is known.</p>
 <p>This is called the <em>Spectral Theorem</em> - see [MML, Theorem 4.15]</p>
 <blockquote><p><strong>Spectral Theorem (for matrices)</strong>
-If $\boldsymbol{A}$ is real and symmetric then its eigenvalues are
-all real and its eigenvector matrix $\boldsymbol{V}$ can be taken
+If $\boldsymbol{A}$ is real and symmetric (hence square) then its eigenvalues
+are all real and its eigenvector matrix $\boldsymbol{V}$ can be taken
 as <em>orthogonal</em> so that $\boldsymbol{V}^{-1}=\boldsymbol{V}^T$.</p>
 </blockquote>
 
@@ -15024,7 +15025,7 @@ up to rounding error.</p>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="The-Eigen-Decomposition">The Eigen-Decomposition<a class="anchor-link" href="#The-Eigen-Decomposition">&#182;</a></h2><p>Next, by post-multiplyinng by $\boldsymbol{V}^{-1}$
+<h2 id="The-Eigen-Decomposition">The Eigen-Decomposition<a class="anchor-link" href="#The-Eigen-Decomposition">&#182;</a></h2><p>Next, by post-multiplying by $\boldsymbol{V}^{-1}$
 we note that we can also write
 $\boldsymbol{A}\boldsymbol{V}=\boldsymbol{V}\boldsymbol{D}$ 
 as $\boldsymbol{A}=\boldsymbol{V}\boldsymbol{D}\boldsymbol{V}^T$
@@ -15064,7 +15065,7 @@ $$<p>Let's see this in python for a specific example. We start by getting the ei
 $\boldsymbol{A}$ as above.</p>
 
 </div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
@@ -15073,11 +15074,36 @@ $\boldsymbol{A}$ as above.</p>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">]])</span>
 <span class="n">w</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 <span class="n">D</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;D = </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>D = 
+ [[-1.21699057  0.          0.        ]
+ [ 0.          8.21699057  0.        ]
+ [ 0.          0.          7.        ]]
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div><div class="fragment">
@@ -15134,7 +15160,7 @@ $\boldsymbol{A}$ as above.</p>
 <p>Then, next, <code>V[:,0:1]</code> is a <code>numpy</code> <strong>slice</strong>.</p>
 <p>In this type of expression <code>[c,a:b]</code> means take the elements in row <code>c</code> 
 that occupy columns <code>a</code> through to <code>b-1</code>. The expression <code>[:,a:b]</code> means
-take all the rows. Remember that column and row numbering starts at zero
+take <strong>all of</strong> the rows. Remember that column and row numbering starts at zero
 in <code>numpy</code>.</p>
 <p>So, <code>V[:,0:1]</code> says take the first column of <code>V</code> - a column vector, 
 and <code>V[:,0:1].T</code> says take the transpose of the first solumn of <code>V</code>.</p>
@@ -15246,7 +15272,7 @@ in code as <code>D[0,0]*V[:,0:1]*V[:,0:1].T</code>.</p>
 symmetric matrix into pieces and consider as many or as few of those
 pieces as we wish.</p>
 <p>This point of view really suggests an approximation scheme.
-If $\boldsymbol{A}$ is $n\times n$ symmetric then</p>
+If $\boldsymbol{A}$ is $n\times n$ and symmetric then,</p>
 $$
 \boldsymbol{A} =
 \sum_{k=1}^n
@@ -15256,13 +15282,12 @@ $$
 \sum_{k=1}^m
 \lambda_k\boldsymbol{v}_k\boldsymbol{v}_k^T
 $$<p>for $m &lt; n$. We would want to sort the eigenvalues so that the
-most dominant ones come first in this sum, which is the same saying</p>
+most dominant ones come first in this sum, which is the same as saying</p>
 $$
 \vert\lambda_1\vert \ge
 \vert\lambda_2\vert \ge
 \vert\lambda_3\vert \ge  \cdots
-$$<p>And this is exactly what we did above.</p>
-<p>We'll look more closely at this in the workshop session where we will see 
+$$<p>We'll look more closely at this in the workshop session where we will see 
 the effect on the amount of data storage we can save.</p>
 
 </div>
@@ -15332,8 +15357,10 @@ $$$$
  0.08720\ldots &amp; 0.92437\ldots &amp; 0.37139\ldots \\
 \end{array}\right)
 $$<p>If we use these we can indeed check that</p>
-\begin{align}
-&amp;\left(\begin{array}{rr}
+\begin{align*}
+&amp;
+\scriptsize
+\left(\begin{array}{rr}
   -0.062\ldots  &amp; 0.998\ldots \\
    0.998\ldots  &amp; 0.062\ldots \\
 \end{array}\right)
@@ -15352,7 +15379,7 @@ $$<p>If we use these we can indeed check that</p>
 1  &amp;  2 &amp; 5 \\
 5  &amp; -6 &amp; 1 \\
 \end{array}\right)
-\end{align}<p>as required. We aren't going to do it by hand though, that's what
+\end{align*}<p>as required. We aren't going to do it by hand though, that's what
 computers are for!</p>
 
 </div>
@@ -15462,7 +15489,7 @@ computers are for!</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="n">U</span> <span class="o">@</span> <span class="n">S</span> <span class="o">@</span> <span class="n">V</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="n">U</span> <span class="o">@</span> <span class="n">S</span> <span class="o">@</span> <span class="n">VT</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15482,8 +15509,8 @@ computers are for!</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[[ -0.62489209   0.83114856  -0.09838327]
- [ -0.83518135 -10.19748495   4.21430843]]
+<pre>[[-4.44089210e-16 -4.44089210e-16 -1.77635684e-15]
+ [-8.88178420e-16  1.77635684e-15  1.11022302e-16]]
 </pre>
 </div>
 </div>
