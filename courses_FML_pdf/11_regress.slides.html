@@ -14725,7 +14725,7 @@ the squared losses, $y_i - \hat{y}$.</p>
 the term <em>loss</em> refers to
 $\Vert\boldsymbol{y} - \boldsymbol{X}\boldsymbol{\theta}\Vert_2^2$.
 Although this isn't our cost because the average isn't taken.</p>
-<p>Don't get too hung up on this. The MSE Cost s what we are going to work with.</p>
+<p>Don't get too hung up on this. The MSE cost is what we are going to work with.</p>
 <p>And the process we are going to follow is essentially the same in all sources.</p>
 <p>We will choose $m$ and $c$, as captured in $\boldsymbol{\theta} = (c,m)^T$,
 such that this MSE cost (or empirical risk) is as small as it can be given
@@ -14813,7 +14813,7 @@ N_p\mathcal{E}(\boldsymbol{\theta})
 \Vert \boldsymbol{X}\boldsymbol{v}\Vert_2^2.
 $$<p>Suppose now that we consider the particular case where
 $\boldsymbol{\theta}$ satisfies
-$\boldsymbol{X}^T(\boldsymbol{X}\boldsymbol{\theta}-\boldsymbol{y})$.</p>
+$\boldsymbol{X}^T(\boldsymbol{X}\boldsymbol{\theta}-\boldsymbol{y})=0$.</p>
 <p>Then, any departure from $\boldsymbol{\theta}$ to a different point
 $\boldsymbol{\theta}+\boldsymbol{v}$ produces this cost,</p>
 \begin{align}
@@ -15233,12 +15233,9 @@ and the quintic one in blue. The original training data is red.</p>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Overfitting - generalization</span>
-<span class="n">X_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
-<span class="n">y_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span> 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_vals</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">,</span><span class="s1">&#39;.r&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_grid</span><span class="p">,</span> <span class="n">y_hat5</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_vals</span><span class="p">,</span> <span class="n">y_hat1</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_new</span><span class="p">,</span>  <span class="n">y_new</span><span class="p">,</span> <span class="s1">&#39;dk&#39;</span><span class="p">)</span>
+<span class="n">X_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span><span class="p">;</span> <span class="n">y_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_vals</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">,</span><span class="s1">&#39;.r&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_grid</span><span class="p">,</span> <span class="n">y_hat5</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_vals</span><span class="p">,</span> <span class="n">y_hat1</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_new</span><span class="p">,</span>  <span class="n">y_new</span><span class="p">,</span> <span class="s1">&#39;dk&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15260,7 +15257,7 @@ and the quintic one in blue. The original training data is red.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7ffbd28ad0b8&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7fd77971cd30&gt;]</pre>
 </div>
 
 </div>
@@ -15389,7 +15386,7 @@ Our earlier values were: c = [1.01694915] and m = [0.69491525]
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7ffb80a17748&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7fd758847470&gt;]</pre>
 </div>
 
 </div>
@@ -15467,7 +15464,7 @@ can be useful, but let's try and develop some intuition.</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>The best case scenario is where we can find $\boldsymbol{\theta}$ such that
 $\boldsymbol{y} = \boldsymbol{X}\boldsymbol{\theta}$. If in this case
-$\boldsymbol{\psi}$ minimizes $\mathcal{E}_\lambda$, then</p>
+$\boldsymbol{\psi}$ minimizes $\mathcal{E}_\alpha$, then</p>
 $$
 \Vert\boldsymbol{y} - \boldsymbol{X}\boldsymbol{\psi}\Vert_2^2 \le
 \mathcal{E}_\alpha(\boldsymbol{\psi}) \le
@@ -15560,7 +15557,7 @@ $\boldsymbol{X}^T\boldsymbol{X}\boldsymbol{\psi} +\alpha\boldsymbol{\psi}
 = \Vert \boldsymbol{y} - \boldsymbol{X}\boldsymbol{\psi}-\boldsymbol{X}\boldsymbol{v}\Vert_2^2
 = \mathcal{E}_\alpha(\boldsymbol{\psi})
 +\Vert \boldsymbol{X}\boldsymbol{v}\Vert_2^2
-+\lambda\Vert\boldsymbol{v}\Vert_2^2$.</p>
++\alpha\Vert\boldsymbol{v}\Vert_2^2$.</p>
 <p>This is telling us that if we have spurious solutions, and if they are 
 somehow <em>nearby</em> $\boldsymbol{\psi}$ in the sense that we can reach them with
 $\boldsymbol{v}$ being quite small, then the cost can be made significantly
@@ -15672,7 +15669,7 @@ predictor in green.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7ffbc02ff438&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7fd738fea080&gt;]</pre>
 </div>
 
 </div>
@@ -15784,7 +15781,7 @@ ridge reg_intercept_ =  [1.0460251]
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7ffba0cf8860&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7fd7798034a8&gt;]</pre>
 </div>
 
 </div>
@@ -15914,7 +15911,7 @@ predictor in green, and the LASSO predictor in cyan.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7ffb80b29278&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7fd739047e10&gt;]</pre>
 </div>
 
 </div>
@@ -16096,7 +16093,8 @@ between the two classes.</p>
 switch from <strong>off</strong> to <strong>on</strong> as we cross the decision boundary.</p>
 <p>Here, for $a\in\mathbb{R}$, is the logistic function, often called the <strong>sigmoid</strong>:</p>
 $$
-\sigma(x\mid a) = \frac{1}{1+\exp(-ax)}
+\sigma(x\mid a) = \frac{1}{1+\exp(-ax)},
+\qquad\text{for } a &gt;0.
 $$<p><strong>In Particular:</strong> the sigmoid function can model a <strong>probability</strong>.</p>
 
 </div>
@@ -16223,7 +16221,7 @@ $$
 $$<p>For example, with $a=-1$, $b=1$ and $c=0$ we have,</p>
 $$
 \sigma(x_1, x_2 \mid -1, 1, 0) = \frac{1}{1+\exp\big(-(x_2-x_1)\big)}
-$$<p>Now, along the line $x-1 = x_2$ we have $\sigma(x_1, x_2 \mid -1, 1, 0)=0.5$.</p>
+$$<p>Now, along the line $x_1 = x_2$ we have $\sigma(x_1, x_2 \mid -1, 1, 0)=0.5$.</p>
 <p>To one side of the line $\sigma \to 0$ and to the other side of the line 
 $\sigma \to 1$. This means we have a switch, or a signal, that we can think
 of as being off on one side of the line and switched on if we are on 
@@ -16435,7 +16433,7 @@ the penguins data we have been using.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;seaborn.axisgrid.PairGrid at 0x7ffba0d14ba8&gt;</pre>
+<pre>&lt;seaborn.axisgrid.PairGrid at 0x7fd75889e4e0&gt;</pre>
 </div>
 
 </div>
@@ -16490,7 +16488,7 @@ the penguins data we have been using.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;seaborn.axisgrid.PairGrid at 0x7ffbc032e710&gt;</pre>
+<pre>&lt;seaborn.axisgrid.PairGrid at 0x7fd728183198&gt;</pre>
 </div>
 
 </div>
@@ -16818,7 +16816,7 @@ the Normal Equations), but we can use numerical techniques.</p>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="&#160;The-$p&gt;n$-Issue">&#160;The $p&gt;n$ Issue<a class="anchor-link" href="#&#160;The-$p&gt;n$-Issue">&#182;</a></h3><p>We discussed the fact that $\boldsymbol{X}^T\boldsymbol{X}$ is
+<h4 id="The-$p&gt;n$-Issue">The $p&gt;n$ Issue<a class="anchor-link" href="#The-$p&gt;n$-Issue">&#182;</a></h4><p>We discussed the fact that $\boldsymbol{X}^T\boldsymbol{X}$ is
 invertible if $\boldsymbol{X}$ has full column rank</p>
 <p>For a discussion and proof see Page 149 of <em>Linear Algebra for Everyone</em>, 
 by Gilbert Strang, Wellesley Cambridge Press, 2020.</p>
@@ -16833,7 +16831,7 @@ want to see the mathematical details.</p>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Bias-Variance-Decomposition-and-Trade-Off">Bias-Variance Decomposition and Trade-Off<a class="anchor-link" href="#Bias-Variance-Decomposition-and-Trade-Off">&#182;</a></h3><p>Consider a model that produces a random variable $z$ as an estimate of an unknown
+<h4 id="Bias-Variance-Decomposition-and-Trade-Off">Bias-Variance Decomposition and Trade-Off<a class="anchor-link" href="#Bias-Variance-Decomposition-and-Trade-Off">&#182;</a></h4><p>Consider a model that produces a random variable $z$ as an estimate of an unknown
 $z_0$. We would like $\bar{z}$ - the mean of $z$ - to be $z_0$.</p>
 <ul>
 <li>We call $\bar{z}-z_0$ the <strong>bias</strong> in the model.</li>
@@ -16886,7 +16884,7 @@ higher quality discussions.</p>
 </ul>
 <p>Now we can start putting all of this material to work.</p>
 <h3 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h3><p>In the next session we will briefly discuss <strong>Support Vector Machines</strong> (SVM's) and 
-quickly move to to discuss the <strong>perceptron</strong>.</p>
+quickly move on to discuss the <strong>perceptron</strong>.</p>
 <p>Our SVM treatment will be very shallow - to prepare yourself for this your homework
 is to read
 <a href="https://www.syncfusion.com/succinctly-free-ebooks/support-vector-machines-succinctly">https://www.syncfusion.com/succinctly-free-ebooks/support-vector-machines-succinctly</a>
