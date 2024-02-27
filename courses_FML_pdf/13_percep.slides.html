@@ -14704,11 +14704,11 @@ $(x_1,x_2)=(-2,-1)$.</p>
 <span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 <span class="c1"># find y for input x = (3,1)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">T</span><span class="nd">@X</span><span class="o">-</span><span class="n">b</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">T</span><span class="nd">@X</span><span class="o">+</span><span class="n">b</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;For input x = ( 3, 1), y = &#39;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="c1"># find y for input x = (-2,-1)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">T</span><span class="nd">@X</span><span class="o">-</span><span class="n">b</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">T</span><span class="nd">@X</span><span class="o">+</span><span class="n">b</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;For input x = (-2,-1), y = &#39;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 
@@ -14760,7 +14760,7 @@ then the two input points</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x_1&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;x_2&#39;</span><span class="p">);</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;above&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;below&#39;</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>  <span class="c1"># the semi-colon here stops the &#39;print output&#39; from appearing</span>
 </pre></div>
 
      </div>
@@ -14772,20 +14772,6 @@ then the two input points</p>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;matplotlib.legend.Legend at 0x7f94e02e8e10&gt;</pre>
-</div>
-
-</div>
 
 <div class="jp-OutputArea-child">
 
@@ -14929,7 +14915,7 @@ $$
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7f952066ee10&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7fbad820dfd0&gt;]</pre>
 </div>
 
 </div>
@@ -15212,7 +15198,7 @@ four classes and the separating decision boundaries naurally emerge.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7f950073dcf8&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7fbac813def0&gt;]</pre>
 </div>
 
 </div>
@@ -15470,7 +15456,7 @@ $$
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;matplotlib.legend.Legend at 0x7f9510275588&gt;</pre>
+<pre>&lt;matplotlib.legend.Legend at 0x7fbaf8f635c0&gt;</pre>
 </div>
 
 </div>
