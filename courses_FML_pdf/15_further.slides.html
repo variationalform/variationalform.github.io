@@ -14592,7 +14592,7 @@ a new way to ascribe an <strong>error</strong> or <strong>loss/cost</strong> to 
 <h3 id="Outputs-as-Probabilities">Outputs as Probabilities<a class="anchor-link" href="#Outputs-as-Probabilities">&#182;</a></h3><p>The difficulty with what we have just discovered though is that we
 interpreted $\boldsymbol{y} = (0.1, 0.05, 0.65, 0.2)^T$ as a probability
 mass function.</p>
-<p>In fact we have so safeguards in place in our neural net to make sure that
+<p>In fact we have no safeguards in place in our neural net to make sure that
 this is justified. The sigmoid function forces each element of 
 $\boldsymbol{y}$ to be within the interval $(0,1)$ but doesn't force the values to
 sum to one. For example,</p>
@@ -14639,8 +14639,8 @@ $$
 \boldsymbol{b}_1,\boldsymbol{b}_2,\boldsymbol{b}_3)
 = \sum_{k=1}^{N_{\mathrm{train}}} 
 \mathscr{F}(\boldsymbol{t}_k,\boldsymbol{y}_k)
+\qquad\text{for the loss}\ldots\quad
 $$$$
-\text{for the loss}\quad
 \mathscr{F}_k := \mathscr{F}(\boldsymbol{t}_k,\boldsymbol{y}_k) :=
 -\sum_{j=1}^d t_{kj}\ln(y_{kj})
 \quad\text{instead of (TSE)}\quad
@@ -14743,7 +14743,7 @@ $$
 $$
 S_c = 
 -t_c
-+y_c\sum_{j=1}^d t_j = -(-t_c-y_c) = -e_c
++y_c\sum_{j=1}^d t_j = -(t_c-y_c) = -e_c
 $$<p>for $\boldsymbol{e}=\boldsymbol{t}-\boldsymbol{y}$ and because 
 $\boldsymbol{t}$ is <strong>one hot</strong>.</p>
 <p>In summary, to use <strong>cross entropy</strong> cost we put 
@@ -14942,7 +14942,7 @@ $$<p>This nice illustration comes from [FDS, Chapter 2.3]</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Comments? Think about $k$-Nearest Neighbours in high dimensions.
 In $100$ dimensions, most of the volume (and data? and neighbours?) 
-would be in the $5\%$ shell.</p>
+would be in the outer shell.</p>
 
 </div>
 </div></div></section></section><section><section>
@@ -14967,7 +14967,7 @@ $d^{1/p}$ which grows more and more slowly as $p\to\infty$.</p>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="The-Curse-of-Dimensionality">The Curse of Dimensionality<a class="anchor-link" href="#The-Curse-of-Dimensionality">&#182;</a></h3><p>This generic refers to the fact that often things get <strong>harder</strong> as we move to
+<h3 id="The-Curse-of-Dimensionality">The Curse of Dimensionality<a class="anchor-link" href="#The-Curse-of-Dimensionality">&#182;</a></h3><p>This generic term refers to the fact that often things get <strong>harder</strong> as we move to
 higher and higher dimensions.</p>
 <p>Consider $k$-NN with the 2-norm in $\mathbb{R}^d$. If there are $N$ data points 
 then when a new point arrives we have to calculate the $N$ distances to each
@@ -15115,7 +15115,7 @@ how many students share that same data.</p>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Look at how many buckets get more than one item.</p>
+<p>Look at how many buckets get more than zero items.</p>
 
 </div>
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -15124,7 +15124,7 @@ how many students share that same data.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">buckets</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">buckets</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -15146,9 +15146,10 @@ how many students share that same data.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>(array([494., 106.,  12.,   2.,   0.,   0.,   0.,   0.]),
- array([1, 2, 3, 4, 5, 6, 7, 8, 9]),
- &lt;BarContainer object of 8 artists&gt;)</pre>
+<pre>(array([1.543e+03, 5.570e+02, 7.800e+01, 1.100e+01, 1.000e+00, 0.000e+00,
+        0.000e+00, 0.000e+00, 0.000e+00]),
+ array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+ &lt;BarContainer object of 9 artists&gt;)</pre>
 </div>
 
 </div>
@@ -15162,7 +15163,7 @@ how many students share that same data.</p>
 
 
 <div class="jp-RenderedImage jp-OutputArea-output ">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,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
 "
 >
 </div>
@@ -15215,16 +15216,16 @@ how many students share that same data.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Probability that anonymous data occurs only once:  0.6586666666666666
+<pre>Probability that anonymous data occurs only once:  0.7426666666666667
 Nearly exact probability that anonymous data occurs only once:  0.7100174346347615
 number of buckets = 2190
 number of items in buckets = 750.0
-number of non-empty buckets 614
-&gt; number of buckets with 0 items 1576
-&gt; number of buckets with 1 items 494
-&gt; number of buckets with 2 items 106
-&gt; number of buckets with 3 items 12
-&gt; number of buckets with 4 items 2
+number of non-empty buckets 647
+&gt; number of buckets with 0 items 1543
+&gt; number of buckets with 1 items 557
+&gt; number of buckets with 2 items 78
+&gt; number of buckets with 3 items 11
+&gt; number of buckets with 4 items 1
 &gt; number of buckets with &gt;4 items 0
 </pre>
 </div>
@@ -15291,8 +15292,8 @@ Bear this experiment in mind. Anonymity isn't as straightforward as it may seem.
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Probability that anonymous data occurs at most twice:  0.9413333333333334
-Probability that anonymous data occurs at most three times:  0.9893333333333333
+<pre>Probability that anonymous data occurs at most twice:  0.9506666666666667
+Probability that anonymous data occurs at most three times:  0.9946666666666667
 Probability that anonymous data occurs at most four times:  1.0
 750
 </pre>
@@ -15331,7 +15332,7 @@ important decisions (life or death or financial or societal or ...).</p>
 <p>Some of those decisions may be poor. How can
 we make judgements about whether the mistake is justified or not?</p>
 <p>A self-driving car may have to choose between hitting a child that ran into the
-road, or driving its passengers off the road into the neightbouring sea.</p>
+road, or driving its passengers off the road into the neighbouring sea.</p>
 <p>How can we prepare an AI for that? How can we probe its decision after the fact?</p>
 <p>It may not matter if your social media app wrongly face-tagged your best friend
 as your sister, but what about in financial and medical scenarios? What about
