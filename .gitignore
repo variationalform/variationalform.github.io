@@ -4,10 +4,13 @@
 !README.md
 !.gitignore
 !index.html
+!tsfrm.html
 !courses
 !courses/**
 !courses_FML_pdf
 !courses_FML_pdf/**
+!courses_TSFRM_pdf
+!courses_TSFRM_pdf/**
 !downloads
 !downloads/**
 **/.DS_Store
