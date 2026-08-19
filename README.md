@@ -18,3 +18,15 @@ git subtree push --prefix courses_FML_pdf origin gh-pages
 taken from <https://blog.raw.pm/en/deploying-subfolder-github-pages> on 10 jan 2023.
 
 
+
+Correcting commit message after pushing... Example:
+
+```
+git commit -m 'Amendmants, corrections and updates for August 2026 re-run'
+git push
+# 'Amendments' needs correcting
+git commit --amend -m 'Amendments, corrections and updates for August 2026 re-run'
+git push --force
+
+```
+
