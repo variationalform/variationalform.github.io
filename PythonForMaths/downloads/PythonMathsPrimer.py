@@ -3,14 +3,16 @@
 
 # # An Introduction to Python for Mathematics
 # 
-# ## a crash course
+# ## A crash course
 # 
 # *Simon Shaw*
 # 
 # - <https://www.brunel.ac.uk/people/simon-shaw>
 # - <https://github.com/variationalform>
 # 
-# Version 1
+# **Version 2:** *19 August 2026*
+# 
+# (Updated from *Version 1, August 2024*)
 
 # <table>
 # <tr>
@@ -25,7 +27,7 @@
 # This work is available under GPL 3
 # 
 # <p>
-# Visit <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">https://www.gnu.org/licenses/gpl-3.0.en.html</a> to see the terms.
+# Visit <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><tt>https://www.gnu.org/licenses/gpl-3.0.en.html</tt></a> to see the terms.
 # </td>
 # </tr>
 # </table>
@@ -256,9 +258,9 @@ print(f"Frobenius norm, ||AV-VD||F = {np.linalg.norm(A@V - V@D, ord='fro')}")
 
 K = np.array([[1,2,5],[5,-6,1]])   
 U, S, VT = np.linalg.svd(K)
-print('U is what we expect', U)
-print('But S is not!', S)
-print('V-transpose gets returned, not V', VT)
+print('U is what we expect:\n', U)
+print('But S is not!\n', S)
+print('V-transpose gets returned, not V:\n', VT)
 
 
 # We can stack `S` to get what we expect ...
@@ -335,7 +337,7 @@ plt.plot(x,y1, 'b-.')
 plt.plot(x,y2, 'r:')
 plt.axis([-5, 4, -2, 10])
 plt.legend(['2^(3sin)', 'log(1.2+sin)'], fontsize=15)
-plt.xlabel(r'$x_1$', fontsize=20); plt.ylabel('$y_1$ and $y_2$', fontsize=20) 
+plt.xlabel(r'$x_1$', fontsize=20); plt.ylabel('$y_1$ and $y_2$', fontsize=20)
 plt.savefig('./gfx/my2Dplot2.png', dpi=600)
 plt.savefig('./gfx/my2Dplot2.eps', dpi=600)
 
@@ -580,7 +582,7 @@ print(f'{tstat} > {tcrit} so we reject the null hypothesis at {100*alpha}%')
 print(f'the p value is {2*t.cdf(-tstat, df=N-1)}')
 
 
-# In[30]:
+# In[27]:
 
 
 # https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html#scipy.stats.ttest_1samp
@@ -597,7 +599,7 @@ ttest_1samp(prot, 20, axis=0)
 # Toss a coin 12 times, with a bias. A head is 1, a tail is zero.
 # 
 
-# In[31]:
+# In[28]:
 
 
 # random integers from low (inclusive) to high (exclusive).
@@ -619,21 +621,38 @@ print(tosses)
 # # Photo Compression
 # 
 # Either get your own jpeg or use one of the supplied ones...
+# 
+# - `ffc.jpg`, a high resolution image
+# - `ffc_lores.jpg`, a low resolution version for faster calculations
+# 
+# Use `True` or `False` here to control the choice...
 
-# In[32]:
+# In[29]:
+
+
+using_low_res = True
+
+
+# In[30]:
 
 
 from PIL import Image
 import IPython.display
 # Use a jpeg photo - ffc.jpg is about 6.2MB (use your own path/filename here)
-IPython.display.Image(filename='./gfx/ffc.jpg', width = 150)
+if using_low_res:
+  IPython.display.Image(filename='./gfx/ffc_lores.jpg', width = 150)
+else:
+  IPython.display.Image(filename='./gfx/ffc.jpg', width = 150)
 
 
-# In[33]:
+# In[31]:
 
 
 # that is just a display, so ... load in the FFC bear - Roy - and visually check him.
-img = Image.open('./gfx/ffc.jpg')
+if using_low_res:
+  img = Image.open('./gfx/ffc_lores.jpg')
+else:
+  img = Image.open('./gfx/ffc.jpg')
 # convert him to a numpy array for processing as a matrix
 a = np.asarray(img)
 im_orig = Image.fromarray(a)
@@ -643,7 +662,7 @@ plt.imshow(im_orig);
 # This image is made up of pixels where each pixel has a value for RED, GREEN and BLUE. We
 # can get these colour bands and show them as follows…
 
-# In[34]:
+# In[32]:
 
 
 # convert band 'bnd' to a numpy array and show them...
@@ -656,7 +675,7 @@ for bnd in range(3):
 plt.subplots_adjust(wspace=0.5)
 
 
-# In[35]:
+# In[33]:
 
 
 # get the red, green and blue bands as separate objects...
@@ -672,7 +691,7 @@ print('sizes = ', imgr_mat.size, imgg_mat.size, imgb_mat.size)
 print('shapes = ', imgr_mat.shape, imgg_mat.shape, imgb_mat.shape)
 
 
-# In[36]:
+# In[34]:
 
 
 # get image shape - we can assume they are all the same
@@ -689,7 +708,7 @@ print(type(imgb_mat))
 Using the Singular Value Decomposition we can hope to compress these objects.
 
 First get the SVD’s of the R, G and B layers… (takes a while)
-# In[37]:
+# In[35]:
 
 
 Ur, Sr, VTr = np.linalg.svd(imgr_mat)
@@ -700,7 +719,7 @@ print(f'GREEN: shapes of Ug, Sg, VTg = {Ug.shape}, {Sg.shape}, {VTg.shape}')
 print(f'BLUE: shapes of Ub, Sb, VTb = {Ub.shape}, {Sb.shape}, {VTb.shape}')
 
 
-# In[38]:
+# In[36]:
 
 
 # choose the number of components to use in the reconstruction
@@ -715,7 +734,7 @@ PIL_image.show()   # uncomment this to spawn an external viewer
 PIL_image.save("ffc_recon.jpg")  # save the reconstruction if you like
 
 
-# In[39]:
+# In[37]:
 
 
 fig=plt.figure(figsize=(4, 3)); fig.suptitle('Comparison', fontsize=15)
@@ -771,7 +790,7 @@ plt.subplot(1,2,2); ax = plt.gca(); ax.imshow(im_orig); ax.set_title('original',
 #   - git add, commit and push
 # - rebuild binder
 
-# In[40]:
+# In[ ]:
 
 
 get_ipython().run_cell_magic('bash', '', 'NBROOTNAME=PythonMathsPrimer\nOUTPUTTING=1\n\nif [ $OUTPUTTING -eq 1 ]; then\n  #jupyter nbconvert --to html $NBROOTNAME.ipynb\n  #cp $NBROOTNAME.html ./backups/$(date +"%m_%d_%Y-%H%M%S")_$NBROOTNAME.html\n  #mv -f $NBROOTNAME.html ./formats/\n\n  jupyter nbconvert --to slides $NBROOTNAME.ipynb\n  cp $NBROOTNAME.slides.html ./backups/$(date +"%m_%d_%Y-%H%M%S")_$NBROOTNAME.slides.html\n  mv -f $NBROOTNAME.slides.html ./formats/\n\n  jupyter nbconvert --to pdf $NBROOTNAME.ipynb\n  cp $NBROOTNAME.pdf ./backups/$(date +"%m_%d_%Y-%H%M%S")_$NBROOTNAME.pdf\n  mv -f $NBROOTNAME.pdf ./formats/\n\n  jupyter nbconvert --to script $NBROOTNAME.ipynb\n  cp $NBROOTNAME.py ./backups/$(date +"%m_%d_%Y-%H%M%S")_$NBROOTNAME.py\n  mv -f $NBROOTNAME.py ./formats/\nelse\n  echo \'Not Generating html, pdf and py output versions\'\nfi')
@@ -780,5 +799,5 @@ get_ipython().run_cell_magic('bash', '', 'NBROOTNAME=PythonMathsPrimer\nOUTPUTTI
 # In[ ]:
 
 
-
+print('End of Notebook')
 
