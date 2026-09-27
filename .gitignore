@@ -11,6 +11,8 @@
 !courses_FML_pdf/**
 !courses_TSFRM_pdf
 !courses_TSFRM_pdf/**
+!courses_PML
+!courses_PML/**
 !downloads
 !downloads/**
 **/.DS_Store
