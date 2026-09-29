@@ -927,7 +927,8 @@ y = dfp2.iloc[:, 0].values
 
 # from the scikit-learn library we use 40% of the data to test
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.40, random_state=42, stratify=y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, \
+                test_size=0.40, random_state=42, stratify=y)
 
 
 # The function returns four subsets of data:
@@ -944,8 +945,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.40, random
 # In[46]:
 
 
-print('shape of X_train = ', X_train.shape,' and of X_test = ', X_test.shape)
-print('shape of y_train = ', y_train.shape,' and of y_test = ', y_test.shape)
+print('shape of X_train = ', X_train.shape,\
+      ' and of X_test = ', X_test.shape)
+print('shape of y_train = ', y_train.shape,\
+      ' and of y_test = ', y_test.shape)
 
 
 # #### Normalization of Data
@@ -1234,8 +1237,8 @@ print(np.trace(cm)/cm.sum())
 # 
 # At some point this is better as a bash script outside of the notebook
 
-# In[61]:
+# In[60]:
 
 
-get_ipython().run_cell_magic('bash', '', 'NBROOTNAME=\'02_knn\'\nOUTPUTTING=1\n\nif [ $OUTPUTTING -eq 1 ]; then\n#  jupyter nbconvert --to slides --theme=simple $NBROOTNAME.ipynb\n  jupyter nbconvert --to slides $NBROOTNAME.ipynb\n  cp $NBROOTNAME.slides.html ../backups/$(date +"%m_%d_%Y-%H%M%S")_$NBROOTNAME.slides.html\n  mv -f $NBROOTNAME.slides.html ../formats/slides/\n\n  jupyter nbconvert --to pdf $NBROOTNAME.ipynb\n  cp $NBROOTNAME.pdf ../backups/$(date +"%m_%d_%Y-%H%M%S")_$NBROOTNAME.pdf\n  mv -f $NBROOTNAME.pdf ../formats/pdf/\n\n  jupyter nbconvert --to script $NBROOTNAME.ipynb\n  cp $NBROOTNAME.py ../backups/$(date +"%m_%d_%Y-%H%M%S")_$NBROOTNAME.py\n  mv -f $NBROOTNAME.py ../formats/py/\n  echo; echo \'Finished generating html, pdf and py output versions\'\nelse\n  echo \'Not Generating html, pdf and py output versions\'\nfi\n')
+get_ipython().run_cell_magic('bash', '', 'NBROOTNAME=\'02_knn\'\nOUTPUTTING=0\n\nif [ $OUTPUTTING -eq 1 ]; then\n#  jupyter nbconvert --to slides --theme=simple $NBROOTNAME.ipynb\n  jupyter nbconvert --to slides $NBROOTNAME.ipynb\n  cp $NBROOTNAME.slides.html ../backups/$(date +"%m_%d_%Y-%H%M%S")_$NBROOTNAME.slides.html\n  mv -f $NBROOTNAME.slides.html ../formats/slides/\n\n  jupyter nbconvert --to pdf $NBROOTNAME.ipynb\n  cp $NBROOTNAME.pdf ../backups/$(date +"%m_%d_%Y-%H%M%S")_$NBROOTNAME.pdf\n  mv -f $NBROOTNAME.pdf ../formats/pdf/\n\n  jupyter nbconvert --to script $NBROOTNAME.ipynb\n  cp $NBROOTNAME.py ../backups/$(date +"%m_%d_%Y-%H%M%S")_$NBROOTNAME.py\n  mv -f $NBROOTNAME.py ../formats/py/\n  echo; echo \'Finished generating html, pdf and py output versions\'\nelse\n  echo \'Not Generating html, pdf and py output versions\'\nfi\n')
 
